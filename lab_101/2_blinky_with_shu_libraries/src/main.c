@@ -19,9 +19,7 @@
 #include "gpio.h"
 
 // map the led to GPIO PI1 (again, this is the inbuilt led)
-gpio_pin_t red = {PI_1, GPIOI, GPIO_PIN_1};
-gpio_pin_t amber = {PB_14, GPIOB, GPIO_PIN_14};
-gpio_pin_t green = {PB_15, GPIOB, GPIO_PIN_15};
+gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
 
 // this is the main method
 int main()
@@ -32,52 +30,15 @@ int main()
   init_sysclk_216MHz();
   
   // initialise the gpio pins
-  init_gpio(red, OUTPUT);
-	init_gpio(amber, OUTPUT);
-	init_gpio(green, OUTPUT);
+  init_gpio(led, OUTPUT);
   
   // loop forever ...
   while(1)
   {
-    // toggle the red led on
-    toggle_gpio(red);
+    // toggle the led on the gpio pin
+    toggle_gpio(led);
     
     // wait for 1 second
-    HAL_Delay(2000);
-		
-		
-		// toggle the amber led on aswell
-		toggle_gpio(amber);
-    
-    // wait for 1 second
-    HAL_Delay(2000);
-		
-		
-		// toggle the amber and red off, but green on
-		toggle_gpio(amber);
-		toggle_gpio(red);
-		toggle_gpio(green);
-    
-    // wait for 1 second
-    HAL_Delay(2000);
-		
-		
-		// toggle the green off and amber on
-		toggle_gpio(green);
-		toggle_gpio(amber);
-    
-    // wait for 1 second
-    HAL_Delay(2000);
-		
-		
-		// toggle the amber off
-		toggle_gpio(amber);
-		
-    
-    // wait for 1 second
-    HAL_Delay(2000);
-	
-		
-		
+    HAL_Delay(1000);
   }
 }
