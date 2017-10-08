@@ -23,6 +23,11 @@ gpio_pin_t red = {PI_1, GPIOI, GPIO_PIN_1};
 gpio_pin_t amber = {PB_14, GPIOB, GPIO_PIN_14};
 gpio_pin_t green = {PB_15, GPIOB, GPIO_PIN_15};
 
+// map the second set of traffic LED's
+gpio_pin_t red2 = {PC_7, GPIOC, GPIO_PIN_7};
+gpio_pin_t amber2 = {PC_6, GPIOC, GPIO_PIN_6};
+gpio_pin_t green2 = {PG_6, GPIOG, GPIO_PIN_6};
+
 // this is the main method
 int main()
 {
@@ -35,45 +40,71 @@ int main()
   init_gpio(red, OUTPUT);
 	init_gpio(amber, OUTPUT);
 	init_gpio(green, OUTPUT);
+	init_gpio(red2, OUTPUT);
+	init_gpio(amber2, OUTPUT);
+	init_gpio(green2, OUTPUT);
   
   // loop forever ...
   while(1)
   {
     
-    // toggle the red led on
-    toggle_gpio(red);
     
-    // wait for 1 second
-    HAL_Delay(1000);
+    toggle_gpio(red);         // Traffic light 1 red LED on
+		toggle_gpio(green2);      // Traffic light 2 green LED on
+
+    
+    // wait for 4 second
+    HAL_Delay(4000);
 		
 		
-		// toggle the amber led on aswell
+		toggle_gpio(amber2);      // Traffic light 2 amber LED on
+		toggle_gpio(green2);      // Traffic light 2 green LED on
+    
+    // wait for 2 second
+    HAL_Delay(2000);
+		
+		
 		toggle_gpio(amber);
+		toggle_gpio(amber2);
+		toggle_gpio(red2);
     
     // wait for 1 second
-    HAL_Delay(1000);
-		
-		
-		// toggle the amber and red off, but green on
-		toggle_gpio(amber);
-		toggle_gpio(red);
-		toggle_gpio(green);
-    
-    // wait for 1 second
-    HAL_Delay(1000);
+    HAL_Delay(2000);
 		
 		
 		// toggle the green off and amber on
-		toggle_gpio(green);
+		toggle_gpio(red);
 		toggle_gpio(amber);
+		toggle_gpio(green);
     
-    // wait for 1 second
-    HAL_Delay(1000);
+		
+    // wait for 2 second
+    HAL_Delay(4000);
+				
 				
 		// toggle the amber off
+		toggle_gpio(green);
 		toggle_gpio(amber);
 		
-    		
+		
+		// wait for 2 second
+    HAL_Delay(2000);
+		
+		
+		toggle_gpio(red);
+		toggle_gpio(amber);
+		toggle_gpio(amber2);
+		
+		// wait for 2 second
+    HAL_Delay(2000);
+		
+	  write_gpio(red, LOW);
+		write_gpio(amber, LOW);
+		write_gpio(green, LOW);
+		write_gpio(red2, LOW);
+		write_gpio(amber2, LOW);
+		write_gpio(green2, LOW);
+		
 		
   }
 }
