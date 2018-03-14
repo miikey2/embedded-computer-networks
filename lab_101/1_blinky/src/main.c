@@ -13,7 +13,7 @@
 #include "stm32f7xx_hal.h"
 
 // map the led to GPIO PI1 (this is the inbuilt led by the reset button)
-#define LED_PIN           GPIO_PIN_1
+#define LED_PIN           GPIO_PIN_2
 #define LED_PORT          GPIOI
 #define LED_CLK_ENABLE()  __GPIOI_CLK_ENABLE()
 
